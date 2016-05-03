@@ -1,5 +1,5 @@
 NAME="clamav-db-daily"
-VERSION=21491.276
+VERSION=21513.277
 RELEASE=1
 CATEGORY="Utils"
 SUMMARY="ClamAV virus definitions"
@@ -16,6 +16,17 @@ SRC_URI="
 SRC_DIR=.
 
 ARCH=noarch
+
+CYGPORT_USE_UNSTABLE_API=1
+src_unpack_hook() {
+	local dailyv=$(sigtool --info daily-*.cvd 2>/dev/null | grep Version: | cut -d' ' -f2)
+	local bytev=$(sigtool --info bytecode-*.cvd 2>/dev/null | grep Version: | cut -d' ' -f2)
+
+	if [ ${dailyv}.${bytev} != ${VERSION} ]
+	then
+		error "Database version mismatch: ${dailyv}.${bytev} != ${VERSION}"
+	fi
+}
 
 src_compile() { :; }
 
