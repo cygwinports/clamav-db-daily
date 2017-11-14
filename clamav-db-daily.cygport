@@ -1,5 +1,5 @@
 NAME="clamav-db-daily"
-VERSION=23767.309
+VERSION=24041.318
 RELEASE=1
 CATEGORY="Utils"
 SUMMARY="ClamAV virus definitions"
