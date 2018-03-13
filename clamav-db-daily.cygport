@@ -1,5 +1,5 @@
 NAME="clamav-db-daily"
-VERSION=24041.318
+VERSION=24388.319
 RELEASE=1
 CATEGORY="Utils"
 SUMMARY="ClamAV virus definitions"
@@ -22,9 +22,9 @@ src_unpack_hook() {
 	local dailyv=$(sigtool --info daily-*.cvd 2>/dev/null | grep Version: | cut -d' ' -f2)
 	local bytev=$(sigtool --info bytecode-*.cvd 2>/dev/null | grep Version: | cut -d' ' -f2)
 
-	if [ ${dailyv}.${bytev} != ${VERSION} ]
+	if [ ${dailyv}${bytev+.}${bytev} != ${VERSION} ]
 	then
-		error "Database version mismatch: ${dailyv}.${bytev} != ${VERSION}"
+		error "Database version mismatch: ${dailyv}${bytev+.}${bytev} != ${VERSION}"
 	fi
 }
 
